@@ -8,5 +8,6 @@ public class MonthlyView extends View {
 
     public MonthlyView(Context context, AttributeSet attrs) {
         super(context, attrs);
+
     }
 }
