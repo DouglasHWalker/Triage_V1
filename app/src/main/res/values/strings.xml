@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Triage</string>
+    <!--TOOLBAR-->
+    <string name="CalendarButtonText">Calendar</string>
+    <string name="FilterButtonText">Filter</string>
+    <string name="TodayButtonText">Today</string>
+</resources>
