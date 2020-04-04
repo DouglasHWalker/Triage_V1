@@ -10,18 +10,17 @@
         android:id="@+id/MonthlyView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/DailyList"
         android:layout_alignParentTop="true">
 
         <com.retrotech.triage.customviews.MonthlyView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="32dp"
             custom:accentColor="@color/colorAccent"
             custom:backgroundColor="@color/colorPrimary"
-            custom:foregroundColor="@color/colorPrimaryDark"
-            custom:monthTextSize="52"
             custom:dateTextSize="40"
-            android:padding="32dp"/>
+            custom:foregroundColor="@color/colorPrimaryDark"
+            custom:monthTextSize="52" />
     </LinearLayout>
 
     <LinearLayout
@@ -29,18 +28,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/Toolbar"
+        android:layout_below="@+id/MonthlyView"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Wednesday, 12 March 2020"
+            android:text="Wednesday, 12 September 2020"
             android:textColor="@color/colorPrimaryDark"
+            android:paddingStart="32dp"
+            android:paddingEnd="0dp"
             android:textSize="18sp" />
 
-        <!--        <ListView-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content" />-->
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 
