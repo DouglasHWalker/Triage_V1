@@ -1,19 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/colorPrimary">
 
     <LinearLayout
         android:id="@+id/MonthlyView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_margin="32dp">
+        android:layout_above="@+id/DailyList"
+        android:layout_alignParentTop="true">
 
         <com.retrotech.triage.customviews.MonthlyView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            custom:accentColor="@color/colorAccent"
+            custom:backgroundColor="@color/colorPrimary"
+            custom:foregroundColor="@color/colorPrimaryDark"
+            custom:monthTextSize="52"
+            custom:dateTextSize="40"
+            android:padding="32dp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -21,21 +29,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/Toolbar"
-        android:layout_below="@+id/MonthlyView"
-        android:layout_marginTop="0dp"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
             android:text="Wednesday, 12 March 2020"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="18sp" />
 
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+        <!--        <ListView-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content" />-->
 
     </LinearLayout>
 
@@ -53,25 +58,12 @@
             android:layout_weight="1" />
 
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="12dp"
             android:id="@+id/CalendarButton"
-            android:text="@string/CalendarButtonText"
-            android:textAllCaps="false"/>
-
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="12dp"
-            android:id="@+id/FilterButton"
-            android:text="@string/FilterButtonText"
-            android:textAllCaps="false"/>
+            android:text="@string/CalendarButtonText"
+            android:textAllCaps="false" />
 
         <Space
             android:layout_width="0dp"
@@ -79,11 +71,24 @@
             android:layout_weight="1" />
 
         <Button
+            android:id="@+id/FilterButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:text="@string/FilterButtonText"
+            android:textAllCaps="false" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <Button
             android:id="@+id/TodayButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="@string/TodayButtonText"
-            android:textAllCaps="false"/>
+            android:textAllCaps="false" />
 
         <Space
             android:layout_width="0dp"
