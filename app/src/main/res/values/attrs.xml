@@ -4,6 +4,7 @@
         <attr name="accentColor" format="color" />
         <attr name="foregroundColor" format="color" />
         <attr name="backgroundColor" format="color" />
+        <attr name="inactiveColor" format="color" />
         <attr name="monthTextSize" format="float" />
         <attr name="dateTextSize" format="float" />
     </declare-styleable>

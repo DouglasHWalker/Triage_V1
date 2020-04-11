@@ -7,12 +7,13 @@
     android:background="@color/colorPrimary">
 
     <LinearLayout
-        android:id="@+id/MonthlyView"
+        android:id="@+id/MonthlyViewRow"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true">
 
         <com.retrotech.triage.customviews.MonthlyView
+            android:id="@+id/monthlyView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="32dp"
@@ -20,6 +21,7 @@
             custom:backgroundColor="@color/colorPrimary"
             custom:dateTextSize="40"
             custom:foregroundColor="@color/colorPrimaryDark"
+            custom:inactiveColor="@color/colorInactive"
             custom:monthTextSize="52" />
     </LinearLayout>
 
@@ -28,7 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/Toolbar"
-        android:layout_below="@+id/MonthlyView"
+        android:layout_below="@+id/MonthlyViewRow"
         android:orientation="vertical">
 
         <TextView
@@ -42,7 +44,8 @@
 
         <ListView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            />
 
     </LinearLayout>
 
@@ -90,7 +93,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/TodayButtonText"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            android:onClick="todayBtnClick"/>
 
         <Space
             android:layout_width="0dp"
