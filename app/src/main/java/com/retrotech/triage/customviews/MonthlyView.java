@@ -13,8 +13,6 @@ import com.retrotech.triage.R;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.LinkedList;
-import java.util.Locale;
 
 public class MonthlyView extends View {
 
@@ -28,12 +26,15 @@ public class MonthlyView extends View {
     private float viewPadding; // TODO: make visible
 
     // internal attributes
+    private Calendar currentCalendar = Calendar.getInstance();
     private Calendar activeCalendar = Calendar.getInstance();
     private String[] activeCache;
     private Date activeDate = new Date(activeCalendar.getTimeInMillis());
     private String monthText;
     private float monthTextX;
     private float monthTextY;
+    private int currentDayX;
+    private int currentDayY;
 
     private float dateTextY;
     private float dayCellDimension;
@@ -100,6 +101,7 @@ public class MonthlyView extends View {
         dateTextPaint.setTypeface(Typeface.DEFAULT);
         dateTextPaint.setTextAlign(Paint.Align.CENTER);
 
+        // current day paint
         currentDayBackgroundPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         currentDayBackgroundPaint.setColor(accentColor);
 
@@ -122,7 +124,7 @@ public class MonthlyView extends View {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
-        safeWidth = (float) getMeasuredWidth() - getPaddingRight() - getPaddingLeft();
+        safeWidth = (float) getMeasuredWidth() - getPaddingRight() - getPaddingLeft(); // TODO: include all the margin, padding calls
         safeHeight = (float) getMeasuredHeight() - getPaddingBottom();
 
         // day text cell width
@@ -131,6 +133,9 @@ public class MonthlyView extends View {
         // monthText
         monthTextX = getPaddingLeft() + (dayCellDimension / 2) - (dateTextSize / 2);
         monthTextY = getPaddingTop() + monthTextSize;
+
+        // current day
+        currentDayX = currentCalendar.get(Calendar.DAY_OF_WEEK) - 1;
 
         for (int i = 0; i < dateXPositions.length; i++) {
             // calculate position
@@ -172,12 +177,13 @@ public class MonthlyView extends View {
         }
 
         // draw active day
-        canvas.drawCircle(dateXPositions[3], dateYPositions[2], dayCellDimension / 2, currentDayBackgroundPaint);
-
+        if(currentDayY != 0) {
+            canvas.drawCircle(dateXPositions[currentDayX], dateYPositions[currentDayY], dayCellDimension / 2, currentDayBackgroundPaint);
+        }
         // draw dates
-        // rows
-        int dateIndex = 0;
 
+        int dateIndex = 0;
+        // rows
         for (int r = 1; r <= numRows; r++) {
             // columns
             for (int c = 0; c < 7; c++) {
@@ -189,7 +195,7 @@ public class MonthlyView extends View {
                 } else {
                     dateTextPaint.setColor(foregroundColor);
                 }
-                if (r == 2 && c == 3) {
+                if (currentDayY != 0 && r == currentDayY && c == currentDayX) {
                     dateTextPaint.setColor(backgroundColor);
                 }
                 canvas.drawText(activeCache[dateIndex], dateXPositions[c], dateYPositions[r], dateTextPaint);
@@ -219,7 +225,7 @@ public class MonthlyView extends View {
         return backgroundColor;
     }
 
-    public Calendar getActiveCalendar(){
+    public Calendar getActiveCalendar() {
         return activeCalendar;
     }
 
@@ -243,7 +249,7 @@ public class MonthlyView extends View {
         requestLayout();
     }
 
-    public void setActiveCalendar(Calendar c){
+    public void setActiveCalendar(Calendar c) {
         this.activeCalendar = c;
         this.activeCache = getDisplayDatesForMonth(activeCalendar);
         init();
@@ -254,7 +260,8 @@ public class MonthlyView extends View {
 
     public String[] getDisplayDatesForMonth(Calendar givenCal) {
 
-        Calendar workingCal = givenCal;
+        Calendar workingCal = Calendar.getInstance();
+        workingCal.set(Calendar.MONTH, givenCal.get(Calendar.MONTH));
         // Calculate array length
         // empties at start
         workingCal.set(Calendar.DAY_OF_MONTH, workingCal.getActualMinimum(Calendar.DAY_OF_MONTH));
@@ -282,9 +289,16 @@ public class MonthlyView extends View {
             index++;
         }
         // fill the middle
+        currentDayY = 0;
         for (int i = 1; i <= numDaysInMonth; i++) {
             activeCache[index] = String.valueOf(i);
             index++;
+
+            if (i == currentCalendar.get(Calendar.DAY_OF_MONTH) &&
+                    givenCal.get(Calendar.MONTH) == currentCalendar.get(Calendar.MONTH) &&
+                    workingCal.get(Calendar.YEAR) == currentCalendar.get(Calendar.YEAR)) {
+                currentDayY = (int) Math.ceil(index / 7.0);
+            }
         }
         // fill the end
         for (int i = 1; i <= numEndEmpties; i++) {
