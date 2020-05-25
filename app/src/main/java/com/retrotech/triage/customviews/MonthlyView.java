@@ -116,7 +116,7 @@ public class MonthlyView extends View {
 
         // Month Text
         activeDate = new Date(activeCalendar.getTimeInMillis());
-        monthText = new SimpleDateFormat("MMMM YYYY").format(activeDate);
+        monthText = new SimpleDateFormat("MMMM yyyy").format(activeDate);
 
     }
 

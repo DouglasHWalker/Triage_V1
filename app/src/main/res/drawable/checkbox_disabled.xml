@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:height="32dp"
+    android:width="32dp"
+    android:viewportHeight="64"
+    android:viewportWidth="64">
+
+    <group android:name="checkBox"
+        android:pivotX="0"
+        android:pivotY="0"
+         >
+
+        <path
+            android:fillColor="@color/colorAccent"
+            android:pathData="M22,32
+                A10,10 0 1,1 42,32
+                A10,10 0 1,1 22,32 Z" />
+        <path
+            android:fillColor="#fff"
+            android:pathData="M24,34
+                A7,8 0 1,1 40, 32
+                A7,7 0 1,1 24, 32 Z" />
+    </group>
+</vector>
